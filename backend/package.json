@@ -1,8 +1,8 @@
 {
   "name": "fixlective-backend",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "description": "Backend de Fixlective, inteligencia colectiva para el diagnóstico de fallas técnicas.",
+  "description": "Backend Fixlective MVP",
   "type": "module",
   "scripts": {
     "start": "node index.js"
@@ -10,6 +10,7 @@
   "dependencies": {
     "cors": "^2.8.6",
     "dotenv": "^18.0.8",
-    "express": "^5.3.0"
+    "express": "^5.3.0",
+    "postgres": "^3.4.7"
   }
 }
