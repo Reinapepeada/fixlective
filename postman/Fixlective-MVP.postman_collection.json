@@ -1,0 +1,648 @@
+{
+  "info": {
+    "name": "Fixlective MVP CRUD",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Ejecutar Create en orden: failure-cases, causes, measurements, confirmations. Delete en orden inverso. Primero Sign up y Login; Supabase puede requerir confirmar email antes de iniciar sesión."
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "case_id",
+      "value": ""
+    },
+    {
+      "key": "cause_id",
+      "value": ""
+    },
+    {
+      "key": "measurement_id",
+      "value": ""
+    },
+    {
+      "key": "confirmation_id",
+      "value": ""
+    },
+    {
+      "key": "access_token",
+      "value": ""
+    },
+    {
+      "key": "email",
+      "value": "tecnico@example.com"
+    },
+    {
+      "key": "password",
+      "value": "change-me"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/health"
+      }
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Sign up",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/api/auth/signup",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"{{email}}\",\"password\":\"{{password}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/api/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"{{email}}\",\"password\":\"{{password}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Login exitoso', () => pm.response.to.have.status(200));",
+                  "if (pm.response.code === 200) pm.collectionVariables.set('access_token', pm.response.json().access_token);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Me",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/auth/me"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Failure cases",
+      "item": [
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/failure-cases",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "failure-cases"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"brand\": \"Samsung\",\n  \"model_commercial\": \"Galaxy S22\",\n  \"model_number\": \"SM-S901B\",\n  \"symptom\": \"No enciende\",\n  \"current_draw\": \"20mA\",\n  \"equipment_status\": \"golpe\",\n  \"author\": \"tecnico-demo\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "if (pm.response.code === 201) pm.collectionVariables.set(\"case_id\", pm.response.json().id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "List",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/failure-cases",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "failure-cases"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/failure-cases/{{case_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "failure-cases/{{case_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/failure-cases/{{case_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "failure-cases/{{case_id}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"symptom\": \"Sin imagen\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/failure-cases/{{case_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "failure-cases/{{case_id}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Causes",
+      "item": [
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/causes",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "causes"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"case_id\": \"{{case_id}}\",\n  \"component_or_zone\": \"PMIC\",\n  \"description\": \"Hipótesis en alimentación\",\n  \"is_confirmed\": false,\n  \"result_post\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "if (pm.response.code === 201) pm.collectionVariables.set(\"cause_id\", pm.response.json().id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "List",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/causes",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "causes"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/causes/{{cause_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "causes/{{cause_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/causes/{{cause_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "causes/{{cause_id}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"is_confirmed\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/causes/{{cause_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "causes/{{cause_id}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Measurements",
+      "item": [
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/measurements",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "measurements"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cause_id\": \"{{cause_id}}\",\n  \"point_or_line\": \"PP_VDD_MAIN\",\n  \"type\": \"voltage\",\n  \"powered\": true,\n  \"fault_value\": \"0\",\n  \"unit\": \"V\",\n  \"normal_value\": \"3.8\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "if (pm.response.code === 201) pm.collectionVariables.set(\"measurement_id\", pm.response.json().id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "List",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/measurements",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "measurements"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/measurements/{{measurement_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "measurements/{{measurement_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/measurements/{{measurement_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "measurements/{{measurement_id}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fault_value\": \"1.2\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/measurements/{{measurement_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "measurements/{{measurement_id}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Confirmations",
+      "item": [
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/confirmations",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "confirmations"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"case_id\": \"{{case_id}}\",\n  \"type\": \"solution_confirmed\",\n  \"user_id\": \"tecnico-demo\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "if (pm.response.code === 201) pm.collectionVariables.set(\"confirmation_id\", pm.response.json().id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "List",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/confirmations",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "confirmations"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/confirmations/{{confirmation_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "confirmations/{{confirmation_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/confirmations/{{confirmation_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "confirmations/{{confirmation_id}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"also_happened\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/confirmations/{{confirmation_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "confirmations/{{confirmation_id}}"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{access_token}}",
+        "type": "string"
+      }
+    ]
+  }
+}
