@@ -1,11 +1,14 @@
 import { Router } from 'express';
 import { sql } from '../config/db.js';
+import { requireAuth } from '../middlewares/auth.js';
+
 const router = Router();
+router.use(requireAuth);
 const definitions = {
   'failure-cases': { table: 'failure_cases', fields: ['brand','model_commercial','model_number','symptom','current_draw','equipment_status','author'], required: ['brand','model_commercial','symptom'], search: true },
   causes: { table: 'causes', fields: ['case_id','component_or_zone','description','is_confirmed','result_post'], required: ['case_id','component_or_zone'] },
   measurements: { table: 'measurements', fields: ['cause_id','point_or_line','type','powered','fault_value','unit','normal_value'], required: ['cause_id','point_or_line','type','fault_value'] },
-  confirmations: { table: 'confirmations', fields: ['case_id','type','user_id'], required: ['case_id','type'] }
+  confirmations: { table: 'confirmations', fields: ['case_id','type'], required: ['case_id','type'] }
 };
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const allowedTypes = ['also_happened','solution_confirmed'];
@@ -53,20 +56,23 @@ for (const [resource, config] of Object.entries(definitions)) {
   }));
   router.post(base,handle(async(req,res)=>{
     const error=validate(req.body,true);if(error)return res.status(400).json({error});
-    const keys=Object.keys(req.body);
-    const rows=await sql`INSERT INTO ${sql(table)} ${sql(req.body, ...keys)} RETURNING *`;
+    const values={...req.body, owner_id:req.user.id};
+    if (resource === 'confirmations') values.user_id=req.user.id;
+    const keys=Object.keys(values);
+    const rows=await sql`INSERT INTO ${sql(table)} ${sql(values, ...keys)} RETURNING *`;
     res.status(201).json(rows[0]);
   }));
   router.patch(base+'/:id',handle(async(req,res)=>{
     if(!uuid.test(req.params.id))return res.status(400).json({error:'UUID inválido'});
     const error=validate(req.body,false);if(error)return res.status(400).json({error});
-    const rows=await sql`UPDATE ${sql(table)} SET ${sql(req.body,...Object.keys(req.body))} WHERE id=${req.params.id} RETURNING *`;
+    if (['case_id','cause_id'].some(k=>Object.hasOwn(req.body,k))) return res.status(400).json({error:'No se permite cambiar la relación del registro'});
+    const rows=await sql`UPDATE ${sql(table)} SET ${sql(req.body,...Object.keys(req.body))} WHERE id=${req.params.id} AND owner_id=${req.user.id} RETURNING *`;
     if(!rows.length)return res.status(404).json({error:'No encontrado'});
     res.json(rows[0]);
   }));
   router.delete(base+'/:id',handle(async(req,res)=>{
     if(!uuid.test(req.params.id))return res.status(400).json({error:'UUID inválido'});
-    const rows=await sql`DELETE FROM ${sql(table)} WHERE id=${req.params.id} RETURNING id`;
+    const rows=await sql`DELETE FROM ${sql(table)} WHERE id=${req.params.id} AND owner_id=${req.user.id} RETURNING id`;
     if(!rows.length)return res.status(404).json({error:'No encontrado'});
     res.status(204).end();
   }));
