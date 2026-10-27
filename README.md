@@ -1,86 +1,75 @@
 # Fixlective
 
-Inteligencia colectiva para el diagnóstico de fallas técnicas. Históricamente conocido como **Failure Library**, Fixlective propone ser un **“Waze de fallas de celulares”**.
+**Inteligencia colectiva para diagnosticar fallas de celulares.** Un “Waze de fallas” para técnicos: buscar síntomas, consultar causas y mediciones, aportar casos y validar soluciones. La meta de encontrar información útil en menos de 10 segundos aún no fue medida.
 
-Está dirigido a técnicos independientes y talleres pequeños que diagnostican placas. El objetivo del producto es ayudarles a encontrar causas probables y mediciones útiles en menos de 10 segundos.
+## Estado del MVP
 
-## Estado actual
+Backend Node.js (ES Modules), Express 5 y PostgreSQL/Supabase. CRUD de cuatro entidades, búsqueda por modelo o síntoma, paginación, confirmaciones con contador automático y autenticación por email/contraseña mediante **Supabase Auth**. No hay frontend ni funciones de IA.
 
-Este repositorio contiene únicamente el esqueleto inicial del backend: configuración, servidor Express y un endpoint de salud. Las carpetas de arquitectura están preparadas, pero todavía no contienen lógica de negocio.
+### Modelo de datos
 
-No incluye modelos, controllers implementados, base de datos, autenticación, integraciones de IA ni frontend. El objetivo de diagnóstico en menos de 10 segundos es una meta del producto, todavía no implementada ni validada.
+```text
+auth.users (1) ----< failure_cases (1) ----< causes (1) ----< measurements
+         |                 |
+         |                 +--------------------< confirmations
+         +----< aportes (owner_id en cada tabla)
+```
 
-## Stack
+- `failure_cases`: dispositivo, síntoma, consumo, estado, autor y total de confirmaciones.
+- `causes`: causas verificadas o hipótesis y resultado de la reparación.
+- `measurements`: mediciones eléctricas asociadas a una causa.
+- `confirmations`: “también me pasó” y “solución confirmada”; una de cada tipo por usuario/caso.
 
-- Node.js con ES Modules (`type: module`).
-- Express.
-- CORS y dotenv.
-- Organización preparada para MVC en una API, sin capa de vistas por ahora.
+Cada registro nuevo se asocia al usuario autenticado mediante `owner_id` (UUID de Supabase Auth). El backend obtiene la identidad desde el token, no del JSON enviado. Los usuarios autenticados pueden consultar registros comunitarios; **solo el dueño puede editar o borrar sus registros**. Los aportes a casos ajenos están permitidos. La eliminación de casos provoca eliminación en cascada de sus relaciones.
 
-## Inicio local
+## Instalación local
 
-Requisitos: Node.js y npm. La base fue verificada con Node.js 24.
+Requisitos: Node.js 20+ y un proyecto Supabase con base PostgreSQL y Auth habilitado.
 
-Desde la raíz del repositorio:
+1. En el SQL Editor de Supabase, ejecutar `backend/migrations/001_mvp.sql` y luego `backend/migrations/002_auth_ownership.sql`.
+2. Copiar `backend/.env.example` a `backend/.env` y configurar `DATABASE_URL`, `SUPABASE_URL`, `SUPABASE_ANON_KEY` y `DB_SSL=true`.
+3. Ejecutar:
 
-```sh
+```bash
 cd backend
-npm ci
+npm install
 npm start
 ```
 
-El servidor escucha en el puerto **3000** por defecto. Para detenerlo, presioná `Ctrl+C`.
+> El `package-lock.json` debe regenerarse con `npm install` para incorporar `postgres` y confirmarse antes de usar `npm ci`. No subir `.env` ni contraseñas. Utilizar la conexión de PostgreSQL **solo desde el servidor**, nunca desde el navegador.
 
-Opcionalmente, creá `backend/.env` copiando el contenido de `backend/.env.example`:
+## API
 
-```dotenv
-PORT=3000
-```
+Base: `http://localhost:3000/api`.
 
-`PORT` permite cambiar el puerto. Los archivos `.env` y `node_modules/` están excluidos de Git; `.env.example` está versionado.
+| Método | Ruta | Descripción |
+| --- | --- | --- |
+| GET | `/health` | Estado básico del servidor (público) |
+| POST | `/auth/signup` | Registrar usuario por email y contraseña |
+| POST | `/auth/login` | Iniciar sesión y obtener `access_token` |
+| GET | `/auth/me` | Consultar usuario autenticado |
+| GET | `/{recurso}` | Listar |
+| GET | `/{recurso}/:id` | Consultar |
+| POST | `/{recurso}` | Crear |
+| PATCH | `/{recurso}/:id` | Actualizar (dueño) |
+| DELETE | `/{recurso}/:id` | Eliminar (dueño) |
 
-## Endpoint disponible
+Recursos: `failure-cases`, `causes`, `measurements`, `confirmations`. Todos los endpoints CRUD requieren `Authorization: Bearer <access_token>`. Los listados aceptan `limit` (máximo 100) y `offset`; `failure-cases?q=...` busca por modelo/síntoma; causas/confirmaciones aceptan `case_id` y mediciones `cause_id`.
 
-```http
-GET http://localhost:3000/api/health
-```
+## Postman
 
-Respuesta: **HTTP 200**.
+Importar `postman/Fixlective-MVP.postman_collection.json`. Configurar `base_url`, `email` y `password`. Ejecutar **Authentication → Sign up**, confirmar el correo si Supabase lo exige, luego **Login** (guarda el token automáticamente). Ejecutar Create en orden: caso → causa → medición → confirmación. Las variables UUID se guardan automáticamente. Para borrar, invertir el orden.
 
-```json
-{ "status": "ok" }
-```
+## Seguridad y límites
 
-Este endpoint confirma que el servidor responde; todavía no hay servicios externos ni base de datos que verificar.
+- La API verifica el token en Supabase Auth y aplica autorización por `owner_id` a actualizaciones y eliminaciones.
+- Las tablas tienen RLS habilitado sin políticas de acceso directo para clientes `anon` o `authenticated`; las consultas pasan por el backend con credenciales PostgreSQL privadas.
+- Los registros existentes antes de la migración de usuarios quedan sin dueño; necesitan asignación administrativa.
+- El login básico no incluye recuperación de contraseña, OAuth, roles ni moderación.
+- **Pendiente:** pruebas automatizadas y de integración con Supabase real, validación de despliegue, regeneración de lockfile y revisión de seguridad antes de producción.
 
-## Estructura
-
-```text
-backend/
-├── .env.example
-├── .gitignore
-├── package.json
-├── package-lock.json
-├── index.js                 # Entorno y arranque del servidor
-└── src/
-    ├── app.js               # Express, middlewares y montaje de rutas
-    ├── config/              # Configuraciones futuras
-    ├── controllers/         # Manejo futuro de solicitudes
-    ├── middlewares/         # Middlewares propios futuros
-    ├── models/              # Modelos futuros
-    ├── routes/
-    │   └── index.routes.js  # Endpoint de salud
-    └── services/            # Lógica de negocio futura
-```
-
-Las carpetas vacías se conservan mediante archivos `.gitkeep`. La configuración actual de CORS permite cualquier origen para esta base inicial.
+Más información: [documentación de API](docs/API_MVP.md).
 
 ## Principios de producto
 
-- **FailureCase** será la entidad central; todavía no está implementada.
-- Priorizar datos estructurados y microcontribuciones de baja fricción, como “Confirmo solución” o “También me pasó”.
-- Separar visual y conceptualmente la evidencia humana de las inferencias de IA. Una hipótesis nunca debe presentarse como evidencia.
-- Evitar convertir el producto en un foro tradicional o un wrapper genérico de ChatGPT.
-- Mantener Failure Fingerprint y los comparadores de similitud avanzados como direcciones futuras.
-
-Antes de incorporar una funcionalidad, definir el usuario y problema específico, si corresponde al MVP de cursada, al MVP de producto o al futuro, los datos estructurados que genera, su aporte al efecto red, sus riesgos y la alternativa más simple.
+Priorizar datos estructurados y microcontribuciones rápidas. Diferenciar hipótesis de causas confirmadas; la IA nunca debe presentarse como evidencia humana. Evitar un foro tradicional y dejar los comparadores avanzados para futuras iteraciones.
