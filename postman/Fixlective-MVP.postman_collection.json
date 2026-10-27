@@ -2,7 +2,7 @@
   "info": {
     "name": "Fixlective MVP CRUD",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": "Ejecutar Create en orden: failure-cases, causes, measurements, confirmations. Delete en orden inverso."
+    "description": "Ejecutar Create en orden: failure-cases, causes, measurements, confirmations. Delete en orden inverso. Primero Sign up y Login; Supabase puede requerir confirmar email antes de iniciar sesión."
   },
   "variable": [
     {
@@ -24,6 +24,18 @@
     {
       "key": "confirmation_id",
       "value": ""
+    },
+    {
+      "key": "access_token",
+      "value": ""
+    },
+    {
+      "key": "email",
+      "value": "tecnico@example.com"
+    },
+    {
+      "key": "password",
+      "value": "change-me"
     }
   ],
   "item": [
@@ -33,6 +45,74 @@
         "method": "GET",
         "url": "{{base_url}}/api/health"
       }
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Sign up",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/api/auth/signup",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"{{email}}\",\"password\":\"{{password}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/api/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"{{email}}\",\"password\":\"{{password}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Login exitoso', () => pm.response.to.have.status(200));",
+                  "if (pm.response.code === 200) pm.collectionVariables.set('access_token', pm.response.json().access_token);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Me",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/auth/me"
+          }
+        }
+      ]
     },
     {
       "name": "Failure cases",
@@ -554,5 +634,15 @@
         }
       ]
     }
-  ]
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{access_token}}",
+        "type": "string"
+      }
+    ]
+  }
 }
