@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&amp;family=JetBrains+Mono:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container-high": "#e6e9e8", "tertiary": "#000000", "background": "#f8faf9", "on-primary-fixed": "#1b1b1b", "pure-ink": "#000000", "surface-dim": "#d8dada", "secondary-fixed": "#e6e1e7", "graphite-muted": "#737373", "surface-container-highest": "#e1e3e2", "secondary-fixed-dim": "#c9c5cb", "canvas-mist": "#f6f8f7", "on-surface-variant": "#4c4546", "on-tertiary": "#ffffff", "graphite-subtle": "#8e8e93", "surface-container-lowest": "#ffffff", "divider-structural": "#d4d4d4", "primary-fixed-dim": "#c6c6c6", "outline": "#7e7576", "on-secondary-fixed-variant": "#48464b", "outline-variant": "#cfc4c5", "carbon-solid": "#0f0e12", "on-primary-fixed-variant": "#474747", "divider-hairline": "#e5e5e5", "on-surface": "#191c1c", "signal-emerald": "#059669", "on-tertiary-fixed": "#2a1700", "signal-crimson": "#e11d48", "on-secondary-container": "#666368", "inverse-surface": "#2e3131", "on-secondary-fixed": "#1c1b1f", "tertiary-fixed-dim": "#ffb95f", "on-background": "#191c1c", "surface-tint": "#5e5e5e", "surface-bright": "#f8faf9", "secondary-container": "#e6e1e7", "amber-telemetry": "#f59e0b", "primary": "#000000", "on-tertiary-fixed-variant": "#653e00", "on-error": "#ffffff", "inverse-primary": "#c6c6c6", "secondary": "#605d62", "surface-container-low": "#f2f4f3", "surface": "#f8faf9", "on-primary-container": "#848484", "on-error-container": "#93000a", "primary-container": "#1b1b1b", "primary-fixed": "#e2e2e2", "error": "#ba1a1a", "surface-variant": "#e1e3e2", "on-primary": "#ffffff", "on-tertiary-container": "#b87500", "surface-container": "#eceeed", "tertiary-container": "#2a1700", "error-container": "#ffdad6", "tertiary-fixed": "#ffddb8", "on-secondary": "#ffffff", "inverse-on-surface": "#eff1f0" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter-desktop": "1.5rem", "space-sm": "0.5rem", "margin": "1rem", "space-xl": "2.5rem", "space-xs": "0.25rem", "space-md": "1rem", "margin-desktop": "2rem", "gutter": "1rem", "space-lg": "1.5rem" }, "fontFamily": { "headline-lg-mobile": ["Inter"], "telemetry-sm": ["JetBrains Mono"], "body-sm": ["Inter"], "display-hero": ["Inter"], "telemetry-lg": ["JetBrains Mono"], "telemetry-md": ["JetBrains Mono"], "headline-lg": ["Inter"], "body-lg": ["Inter"], "headline-sm": ["Inter"], "label-caps": ["JetBrains Mono"], "headline-md": ["Inter"], "body-md": ["Inter"] }, "fontSize": { "headline-lg-mobile": ["1.75rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "200" }], "telemetry-sm": ["0.75rem", { "lineHeight": "0.875rem", "letterSpacing": "0.02em", "fontWeight": "400" }], "body-sm": ["0.75rem", { "lineHeight": "1.125rem", "letterSpacing": "0.01em", "fontWeight": "400" }], "display-hero": ["3.5rem", { "lineHeight": "3.75rem", "letterSpacing": "-0.04em", "fontWeight": "100" }], "telemetry-lg": ["1.5rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.02em", "fontWeight": "500" }], "telemetry-md": ["0.875rem", { "lineHeight": "1.125rem", "letterSpacing": "0em", "fontWeight": "400" }], "headline-lg": ["2.25rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.03em", "fontWeight": "200" }], "body-lg": ["1rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "300" }], "headline-sm": ["1.125rem", { "lineHeight": "1.375rem", "letterSpacing": "-0.01em", "fontWeight": "400" }], "label-caps": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.08em", "fontWeight": "600" }], "headline-md": ["1.5rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.02em", "fontWeight": "300" }], "body-md": ["0.875rem", { "lineHeight": "1.375rem", "letterSpacing": "0em", "fontWeight": "300" }] } } } };</script><style>@layer base { html, body { width: 100vw; margin: 0; padding: 0; background-color: #f6f8f7; color: #191c1c; -webkit-font-smoothing: antialiased; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); } .pt-safe { padding-top: env(safe-area-inset-top, 0px); } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-canvas-mist text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 bg-canvas-mist/90 backdrop-blur-xl pt-safe"><div class="h-14 px-margin flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="font-telemetry-sm text-telemetry-sm font-semibold tracking-wider text-pure-ink uppercase">electrofix · 04</span><span class="font-label-caps text-label-caps text-graphite-muted">//</span><span class="font-label-caps text-label-caps text-graphite-muted uppercase">Search Telemetry</span></div><div class="flex items-center gap-space-sm"><div class="flex items-center gap-1.5 px-space-xs py-0.5 bg-surface-container-high"><div class="w-1.5 h-1.5 bg-pure-ink"></div><span class="font-label-caps text-label-caps text-pure-ink uppercase tracking-widest">online · bench 04</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-14 pb-24 bg-canvas-mist"><div class="flex flex-col w-full text-on-surface">
+<!-- TOP INSTRUMENTATION CONTROL RACK -->
+<section class="w-full flex flex-col bg-canvas-mist border-b border-divider-structural">
+<!-- SUB-HEADER TELEMETRY STRIP -->
+<div class="flex items-center justify-between px-margin py-1.5 border-b border-divider-hairline bg-surface-container-high/40">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-signal-emerald"></span>
+<span class="font-label-caps text-label-caps tracking-widest text-pure-ink uppercase">LOGIC_ANALYZER_SYS_01</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-graphite-muted tracking-tight">INDEX: 1,842 BOARDS</span>
+</div>
+<!-- SEARCH INPUT UNIT -->
+<div class="p-margin flex flex-col gap-space-sm">
+<div class="relative flex items-center bg-surface-container-lowest border border-pure-ink">
+<span class="material-symbols-outlined text-pure-ink ml-3 text-[18px] select-none">search</span>
+<input class="w-full h-11 pl-2.5 pr-10 bg-transparent text-pure-ink font-telemetry-md text-telemetry-md placeholder:text-graphite-subtle focus:outline-none tracking-tight rounded-none" id="fault-query-input" placeholder="search model, chip, or power signature (e.g. iPhone 11 20mA U3300)" type="text" value="iPhone 11 20mA U3300"/>
+<button aria-label="Clear query" class="absolute right-0 h-11 w-11 flex items-center justify-center border-l border-divider-hairline text-pure-ink hover:bg-surface-container-high active:bg-pure-ink active:text-surface-container-lowest transition-colors" id="clear-query-btn">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<!-- HARDWARE SELECTORS MATRIX -->
+<div class="flex flex-col gap-1.5">
+<span class="font-label-caps text-label-caps text-graphite-muted uppercase tracking-widest">[ 01 / TARGET CHASSIS ]</span>
+<div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+<button class="shrink-0 h-8 px-3 bg-pure-ink text-surface-container-lowest font-label-caps text-label-caps tracking-wider uppercase border border-pure-ink flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 bg-surface-container-lowest"></span>
+<span>[●] iPhone 11 · A2111</span>
+</button>
+<button class="shrink-0 h-8 px-3 bg-transparent text-pure-ink font-label-caps text-label-caps tracking-wider uppercase border border-divider-structural hover:border-pure-ink flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 bg-transparent border border-graphite-muted"></span>
+<span>[ ] Samsung S22 Ultra</span>
+</button>
+<button class="shrink-0 h-8 px-3 bg-transparent text-pure-ink font-label-caps text-label-caps tracking-wider uppercase border border-divider-structural hover:border-pure-ink flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 bg-transparent border border-graphite-muted"></span>
+<span>[ ] Xiaomi 12 Pro</span>
+</button>
+</div>
+</div>
+<!-- DC BENCH SIGNATURE FILTERS -->
+<div class="flex flex-col gap-1.5 pt-1">
+<span class="font-label-caps text-label-caps text-graphite-muted uppercase tracking-widest">[ 02 / DC SUPPLY CURRENT DRAW ]</span>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+<button class="h-9 px-2.5 bg-carbon-solid text-surface-container-lowest border border-amber-telemetry flex items-center justify-between font-telemetry-sm text-telemetry-sm tracking-tight text-left">
+<span class="text-amber-telemetry font-bold">⚡ 20 mA FIXED AFTER PWR</span>
+<span class="text-amber-telemetry font-label-caps text-[9px] uppercase px-1 border border-amber-telemetry">MATCH</span>
+</button>
+<button class="h-9 px-2.5 bg-surface-container-low text-graphite-muted border border-divider-structural hover:border-pure-ink hover:text-pure-ink flex items-center justify-between font-telemetry-sm text-telemetry-sm tracking-tight text-left">
+<span>0.00 A NO DRAW</span>
+<span class="font-label-caps text-[9px] uppercase text-graphite-subtle">[ 00 ]</span>
+</button>
+<button class="h-9 px-2.5 bg-surface-container-low text-graphite-muted border border-divider-structural hover:border-pure-ink hover:text-pure-ink flex items-center justify-between font-telemetry-sm text-telemetry-sm tracking-tight text-left">
+<span>VBUS 5V SHORT</span>
+<span class="font-label-caps text-[9px] uppercase text-graphite-subtle">[ 01 ]</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION STATUS BANNER -->
+<div class="w-full px-margin py-2.5 bg-canvas-mist border-b border-divider-structural flex items-center justify-between">
+<span class="font-telemetry-sm text-telemetry-sm text-graphite-muted tracking-widest uppercase">
+      — 02 MATCHING FAULT SIGNATURES // CONFIRMED BENCH LAB
+    </span>
+<span class="font-label-caps text-label-caps text-pure-ink bg-surface-container-high px-1.5 py-0.5 border border-divider-structural">
+      FILTERS ACTIVE (2)
+    </span>
+</div>
+<!-- FAULT CARDS LIST -->
+<div class="flex flex-col p-margin gap-space-lg">
+<!-- FAILURE CARD 01: IPHONE 11 A2111 -->
+<article class="w-full flex flex-col bg-surface-container-lowest border border-divider-structural">
+<!-- CARD HEADER STRIP -->
+<div class="flex items-center justify-between px-space-md py-2.5 border-b border-divider-structural bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="font-telemetry-md text-telemetry-md font-medium text-pure-ink">[ A2111 / IP-11 ]</span>
+<span class="font-label-caps text-label-caps text-graphite-muted">·</span>
+<span class="font-label-caps text-label-caps text-graphite-muted uppercase">MAIN_LOGIC_SANDWICH</span>
+</div>
+<span class="font-label-caps text-label-caps px-2 py-0.5 bg-pure-ink text-surface-container-lowest tracking-wider">
+          LEVEL 3 · MICROSOLDERING
+        </span>
+</div>
+<!-- SYMPTOM & DC DRAW RUNTIME -->
+<div class="p-space-md flex flex-col gap-space-sm border-b border-divider-hairline">
+<div class="flex flex-col gap-0.5">
+<span class="font-label-caps text-label-caps text-graphite-muted uppercase">[ SYMPTOM REPORTED ]</span>
+<p class="font-body-md text-body-md text-pure-ink font-medium">
+            No enciende tras pulsar Power / Sin display / Consumo fijo al gatillar
+          </p>
+</div>
+<!-- DC DRAW TELEMETRY BOX -->
+<div class="p-2.5 bg-canvas-mist border border-pure-ink flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-telemetry-sm text-telemetry-sm font-semibold text-pure-ink">DC BENCH:</span>
+<span class="font-telemetry-md text-telemetry-md text-amber-telemetry font-bold">20 mA CONSTANT</span>
+</div>
+<span class="font-label-caps text-label-caps text-graphite-muted uppercase tracking-tight">
+            (NO BOOTLOADER / NO CYCLING)
+          </span>
+</div>
+</div>
+<!-- CONFIRMED ROOT CAUSE SPEC -->
+<div class="p-space-md flex flex-col gap-space-xs border-b border-divider-hairline">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-graphite-muted uppercase tracking-widest">[ DIAGNOSTIC ROOT CAUSE ]</span>
+<span class="font-label-caps text-label-caps px-1.5 py-0.5 border border-signal-emerald text-signal-emerald tracking-widest bg-canvas-mist">
+            [ 94% VERIFIED ]
+          </span>
+</div>
+<h3 class="font-telemetry-lg text-telemetry-lg font-bold text-pure-ink tracking-tight pt-1">
+          U3300 — IC DE CARGA (HYDRA / TRISTAR)
+        </h3>
+<p class="font-body-sm text-body-sm text-graphite-muted leading-relaxed pt-1">
+          Fuga interna tras sobretensión en pin E3/F3 por accesorio no homologado. Provoca caída a masa bloqueando la línea SMC_RESET_L e impidiendo el arranque del SoC A13.
+        </p>
+</div>
+<!-- KEY DMM BENCH MEASUREMENT (HIGH CONTRAST INVERTED BLOCK) -->
+<div class="p-space-md bg-carbon-solid text-surface-container-lowest flex flex-col gap- space-sm border-b border-carbon-solid">
+<div class="flex items-center justify-between border-b border-graphite-muted/40 pb-1.5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-amber-telemetry text-[18px]">electric_meter</span>
+<span class="font-label-caps text-label-caps tracking-widest uppercase text-surface-container-lowest">
+              CALIBRATED DMM TEST SPEC
+            </span>
+</div>
+<span class="font-label-caps text-label-caps text-graphite-subtle tracking-widest">FLUKE_17B_MODE</span>
+</div>
+<div class="grid grid-cols-2 gap-2 pt-1">
+<div class="flex flex-col border border-graphite-muted/30 p-2 bg-pure-ink/60">
+<span class="font-label-caps text-label-caps text-graphite-subtle uppercase">POWER RAIL</span>
+<span class="font-telemetry-md text-telemetry-md text-surface-container-lowest font-medium mt-0.5">PP_VDD_MAIN</span>
+</div>
+<div class="flex flex-col border border-graphite-muted/30 p-2 bg-pure-ink/60">
+<span class="font-label-caps text-label-caps text-graphite-subtle uppercase">METER TEST MODE</span>
+<span class="font-telemetry-md text-telemetry-md text-surface-container-lowest font-medium mt-0.5">DIODE MODE (V DROP)</span>
+</div>
+</div>
+<div class="flex flex-col border border-amber-telemetry/80 p-2.5 bg-pure-ink">
+<div class="flex justify-between items-baseline">
+<span class="font-label-caps text-label-caps text-amber-telemetry uppercase">VALUE FOUND VS NORMAL</span>
+<span class="font-label-caps text-label-caps text-graphite-subtle">SHORT STATUS</span>
+</div>
+<div class="flex items-baseline justify-between mt-1">
+<span class="font-telemetry-lg text-telemetry-lg font-bold text-amber-telemetry">0.000 V</span>
+<span class="font-telemetry-sm text-telemetry-sm text-surface-container-lowest tracking-tight">(TOTAL SHORT // NORM: 0.420V)</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 pt-1 text-graphite-subtle">
+<span class="material-symbols-outlined text-[14px]">info</span>
+<span class="font-telemetry-sm text-telemetry-sm tracking-tight">
+            Condition: Cold board / Battery disconnected / Red probe to GND
+          </span>
+</div>
+</div>
+<!-- COMMUNITY VALIDATION STRIP -->
+<div class="px-space-md py-2 bg-surface-container-low flex items-center justify-between border-b border-divider-hairline">
+<div class="flex items-center gap-1.5 text-pure-ink">
+<span class="material-symbols-outlined text-signal-emerald text-[16px]">verified</span>
+<span class="font-telemetry-sm text-telemetry-sm">14 bench technicians verified this solution</span>
+</div>
+<span class="font-label-caps text-label-caps text-graphite-muted">[MADRID / BOGOTÁ]</span>
+</div>
+<!-- TACTILE ACTION BUTTONS -->
+<div class="grid grid-cols-2 divide-x divide-pure-ink border-t border-pure-ink">
+<button class="min-h-[52px] h-[52px] bg-pure-ink text-surface-container-lowest font-label-caps text-label-caps tracking-widest uppercase hover:bg-surface-container-lowest hover:text-pure-ink border-b-0 border-t-0 active:bg-amber-telemetry active:text-pure-ink transition-colors flex items-center justify-center gap-2 select-none" onclick="handleConfirm(this)">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span class="action-label">[ ✓ CONFIRMO SOLUCIÓN ]</span>
+</button>
+<button class="min-h-[52px] h-[52px] bg-surface-container-lowest text-pure-ink font-label-caps text-label-caps tracking-widest uppercase hover:bg-surface-container-high border-b-0 border-t-0 active:bg-pure-ink active:text-surface-container-lowest transition-colors flex items-center justify-center gap-2 select-none" onclick="handleFeedback(this)">
+<span class="material-symbols-outlined text-[16px]">chat_bubble_outline</span>
+<span class="feedback-count">[ 💬 TAMBIÉN ME PASÓ (8) ]</span>
+</button>
+</div>
+</article>
+<!-- FAILURE CARD 02: SAMSUNG S22 ULTRA S908B -->
+<article class="w-full flex flex-col bg-surface-container-lowest border border-divider-structural">
+<!-- CARD HEADER STRIP -->
+<div class="flex items-center justify-between px-space-md py-2.5 border-b border-divider-structural bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="font-telemetry-md text-telemetry-md font-medium text-pure-ink">[ S908B / SM-S22U ]</span>
+<span class="font-label-caps text-label-caps text-graphite-muted">·</span>
+<span class="font-label-caps text-label-caps text-graphite-muted uppercase">SUB_BOARD_FPC</span>
+</div>
+<span class="font-label-caps text-label-caps px-2 py-0.5 bg-surface-container-high border border-pure-ink text-pure-ink tracking-wider">
+          LEVEL 2 · PORT &amp; IF-PMIC
+        </span>
+</div>
+<!-- SYMPTOM & DC DRAW RUNTIME -->
+<div class="p-space-md flex flex-col gap-space-sm border-b border-divider-hairline">
+<div class="flex flex-col gap-0.5">
+<span class="font-label-caps text-label-caps text-graphite-muted uppercase">[ SYMPTOM REPORTED ]</span>
+<p class="font-body-md text-body-md text-pure-ink font-medium">
+            Sin carga rápida ni detección USB en PC / Carga lenta intermitente
+          </p>
+</div>
+<!-- DC DRAW TELEMETRY BOX -->
+<div class="p-2.5 bg-canvas-mist border border-divider-structural flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-telemetry-sm text-telemetry-sm font-semibold text-pure-ink">USB TESTER:</span>
+<span class="font-telemetry-md text-telemetry-md text-pure-ink font-bold">0.00 A @ 5.1V</span>
+</div>
+<span class="font-label-caps text-label-caps text-graphite-muted uppercase tracking-tight">
+            (NO AFC / QC NEGOTIATION SWITCH)
+          </span>
+</div>
+</div>
+<!-- CONFIRMED ROOT CAUSE SPEC -->
+<div class="p-space-md flex flex-col gap-space-xs border-b border-divider-hairline">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-graphite-muted uppercase tracking-widest">[ DIAGNOSTIC ROOT CAUSE ]</span>
+<span class="font-label-caps text-label-caps px-1.5 py-0.5 border border-pure-ink text-pure-ink tracking-widest bg-canvas-mist">
+            [ 88% VERIFIED ]
+          </span>
+</div>
+<h3 class="font-telemetry-lg text-telemetry-lg font-bold text-pure-ink tracking-tight pt-1">
+          SUB-PLACA FPC O IF-PMIC S2MU106
+        </h3>
+<p class="font-body-sm text-body-sm text-graphite-muted leading-relaxed pt-1">
+          Fisura por fatiga en flex interconexión FPC pin CC1/CC2 o desprendimiento BGA del IF-PMIC secundario tras caída leve sin daño aparente en chasis.
+        </p>
+</div>
+<!-- MULTIMETER SPEC BOX (TECHNICAL OUTLINE INDUSTRIAL SPEC) -->
+<div class="p-space-md bg-canvas-mist border-b border-divider-structural flex flex-col gap-space-sm">
+<div class="flex items-center justify-between border-b border-divider-structural pb-1.5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-pure-ink text-[18px]">straighten</span>
+<span class="font-label-caps text-label-caps tracking-widest uppercase text-pure-ink">
+              BENCH REFERENCE METRICS
+            </span>
+</div>
+<span class="font-label-caps text-label-caps text-graphite-muted">TEST_LINE_REF</span>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div class="flex flex-col border border-divider-structural p-2 bg-surface-container-lowest">
+<span class="font-label-caps text-label-caps text-graphite-muted uppercase">TEST POINT RAIL</span>
+<span class="font-telemetry-md text-telemetry-md text-pure-ink font-medium mt-0.5">VBUS_5V (CON_SUB)</span>
+</div>
+<div class="flex flex-col border border-divider-structural p-2 bg-surface-container-lowest">
+<span class="font-label-caps text-label-caps text-graphite-muted uppercase">METER TEST MODE</span>
+<span class="font-telemetry-md text-telemetry-md text-pure-ink font-medium mt-0.5">DC VOLTS</span>
+</div>
+</div>
+<div class="flex flex-col border border-pure-ink p-2.5 bg-surface-container-lowest">
+<div class="flex justify-between items-baseline">
+<span class="font-label-caps text-label-caps text-pure-ink uppercase">MEASURED ON PIN #3</span>
+<span class="font-label-caps text-label-caps text-signal-crimson">LINE COLLAPSE</span>
+</div>
+<div class="flex items-baseline justify-between mt-1">
+<span class="font-telemetry-lg text-telemetry-lg font-bold text-signal-crimson">0.20 V</span>
+<span class="font-telemetry-sm text-telemetry-sm text-graphite-muted tracking-tight">(NORM: 5.0V / 9.0V AFC)</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 text-graphite-muted">
+<span class="material-symbols-outlined text-[14px]">tune</span>
+<span class="font-telemetry-sm text-telemetry-sm tracking-tight">
+            Check FPC connector pins under stereo microscope at 30x magnification.
+          </span>
+</div>
+</div>
+<!-- COMMUNITY VALIDATION STRIP -->
+<div class="px-space-md py-2 bg-surface-container-low flex items-center justify-between border-b border-divider-hairline">
+<div class="flex items-center gap-1.5 text-pure-ink">
+<span class="material-symbols-outlined text-signal-emerald text-[16px]">verified</span>
+<span class="font-telemetry-sm text-telemetry-sm">9 bench technicians verified this solution</span>
+</div>
+<span class="font-label-caps text-label-caps text-graphite-muted">[SANTIAGO / CDMX]</span>
+</div>
+<!-- TACTILE ACTION BUTTONS -->
+<div class="grid grid-cols-2 divide-x divide-pure-ink border-t border-pure-ink">
+<button class="min-h-[52px] h-[52px] bg-pure-ink text-surface-container-lowest font-label-caps text-label-caps tracking-widest uppercase hover:bg-surface-container-lowest hover:text-pure-ink border-b-0 border-t-0 active:bg-amber-telemetry active:text-pure-ink transition-colors flex items-center justify-center gap-2 select-none" onclick="handleConfirm(this)">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span class="action-label">[ ✓ CONFIRMO SOLUCIÓN ]</span>
+</button>
+<button class="min-h-[52px] h-[52px] bg-surface-container-lowest text-pure-ink font-label-caps text-label-caps tracking-widest uppercase hover:bg-surface-container-high border-b-0 border-t-0 active:bg-pure-ink active:text-surface-container-lowest transition-colors flex items-center justify-center gap-2 select-none" onclick="handleFeedback(this)">
+<span class="material-symbols-outlined text-[16px]">chat_bubble_outline</span>
+<span class="feedback-count">[ 💬 TAMBIÉN ME PASÓ (5) ]</span>
+</button>
+</div>
+</article>
+<!-- UNLISTED FAULT CALLOUT FOOTER -->
+<div class="w-full p-space-md bg-canvas-mist border border-divider-structural flex items-start gap-3">
+<span class="font-telemetry-md text-telemetry-md font-bold text-pure-ink px-2 py-1 bg-surface-container-high border border-pure-ink select-none">[ ? ]</span>
+<div class="flex flex-col gap-1 min-w-0">
+<span class="font-label-caps text-label-caps text-pure-ink uppercase tracking-wider">UNLISTED BENCH SYMPTOM?</span>
+<p class="font-telemetry-sm text-telemetry-sm text-graphite-muted leading-relaxed">
+          Document atypical board readings, diode measurements, and thermal thermal imaging notes in &lt;60s via <strong class="text-pure-ink">[ + new case ]</strong> in bottom nav.
+        </p>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Fast micro-interactions for bench confirmation & report counts
+  function handleConfirm(button) {
+    const label = button.querySelector('.action-label');
+    if (!button.dataset.confirmed) {
+      button.dataset.confirmed = 'true';
+      button.classList.remove('bg-pure-ink', 'text-surface-container-lowest');
+      button.classList.add('bg-amber-telemetry', 'text-pure-ink');
+      label.textContent = '[ ✓ SOLUCIÓN REGISTRADA ]';
+    } else {
+      delete button.dataset.confirmed;
+      button.classList.add('bg-pure-ink', 'text-surface-container-lowest');
+      button.classList.remove('bg-amber-telemetry', 'text-pure-ink');
+      label.textContent = '[ ✓ CONFIRMO SOLUCIÓN ]';
+    }
+  }
+
+  function handleFeedback(button) {
+    const span = button.querySelector('.feedback-count');
+    const match = span.textContent.match(/\((\d+)\)/);
+    if (match) {
+      let count = parseInt(match[1], 10);
+      if (!button.dataset.voted) {
+        button.dataset.voted = 'true';
+        count += 1;
+        button.classList.add('bg-surface-container-high');
+        span.textContent = `[ 💬 TAMBIÉN ME PASÓ (${count}) ]`;
+      }
+    }
+  }
+
+  // Clear query button handler
+  const clearBtn = document.getElementById('clear-query-btn');
+  const queryInput = document.getElementById('fault-query-input');
+  if (clearBtn && queryInput) {
+    clearBtn.addEventListener('click', () => {
+      queryInput.value = '';
+      queryInput.focus();
+    });
+  }
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-canvas-mist/95 backdrop-blur-xl" data-active-classes="bg-pure-ink text-surface-container-lowest"><div class="grid grid-cols-3 h-14"><a aria-current="page" class="flex items-center justify-center min-h-[44px] px-space-xs transition-colors font-label-caps tracking-widest uppercase bg-pure-ink text-surface-container-lowest" data-path="search-telemetry" href="#">[ 01 / search ]</a><a class="flex items-center justify-center min-h-[44px] px-space-xs bg-pure-ink text-surface-container-lowest font-label-caps text-label-caps tracking-widest uppercase hover:bg-carbon-solid transition-colors" data-path="quick-log" href="#">[ + new case ]</a><a class="flex items-center justify-center min-h-[44px] px-space-xs text-graphite-muted transition-colors font-label-caps text-label-caps tracking-widest uppercase hover:text-pure-ink hover:bg-surface-container-high" data-path="bench-logs" href="#">[ 02 / saved ]</a></div></nav></body></html>

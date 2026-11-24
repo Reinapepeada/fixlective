@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "tertiary-fixed": "#e3e2e2", "inverse-on-surface": "#eff1f0", "tertiary-container": "#1a1c1c", "on-secondary-container": "#684300", "surface-tint": "#605d62", "surface-container-high": "#e6e9e8", "error-container": "#ffdad6", "on-primary-fixed-variant": "#48464b", "secondary": "#825500", "secondary-fixed-dim": "#ffb952", "primary-fixed-dim": "#c9c5cb", "primary-fixed": "#e6e1e7", "on-surface": "#191c1c", "surface-container-lowest": "#ffffff", "on-secondary": "#ffffff", "secondary-container": "#fdab17", "on-secondary-fixed-variant": "#633f00", "on-tertiary-container": "#838484", "error": "#ba1a1a", "on-tertiary-fixed-variant": "#464747", "on-primary-container": "#868388", "primary-container": "#1c1b1f", "secondary-fixed": "#ffddb3", "inverse-primary": "#c9c5cb", "outline-variant": "#c9c5cb", "primary": "#000000", "on-secondary-fixed": "#291800", "on-primary-fixed": "#1c1b1f", "on-surface-variant": "#48464b", "on-tertiary-fixed": "#1a1c1c", "on-background": "#191c1c", "inverse-surface": "#2e3131", "on-primary": "#ffffff", "background": "#f8faf9", "surface-variant": "#e1e3e2", "on-error-container": "#93000a", "surface-bright": "#f8faf9", "surface-container": "#eceeed", "tertiary-fixed-dim": "#c7c6c6", "surface-container-highest": "#e1e3e2", "outline": "#79767b", "on-tertiary": "#ffffff", "on-error": "#ffffff", "surface-container-low": "#f2f4f3", "surface-dim": "#d8dada", "tertiary": "#000000", "surface": "#f8faf9" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "margin-sm": "0.75rem", "space-sm": "0.5rem", "space-md": "1rem", "gutter": "1rem", "space-lg": "1.5rem", "space-xl": "2.5rem", "margin": "1.5rem", "space-xs": "0.25rem", "gutter-sm": "0.5rem" }, fontFamily: { "headline-sm": ["Inter"], "label-sm": ["JetBrains Mono"], "headline-md": ["Inter"], "headline-lg": ["Inter"], "label-lg": ["JetBrains Mono"], "body-lg": ["Inter"], "body-sm": ["Inter"], "body-md": ["Inter"], "headline-lg-mobile": ["Inter"], "label-md": ["JetBrains Mono"] }, fontSize: { "headline-sm": ["16px", { lineHeight: "20px", letterSpacing: "-0.01em", fontWeight: "400" }], "label-sm": ["9px", { lineHeight: "10px", letterSpacing: "0.1em", fontWeight: "400" }], "headline-md": ["20px", { lineHeight: "24px", letterSpacing: "-0.02em", fontWeight: "300" }], "headline-lg": ["32px", { lineHeight: "36px", letterSpacing: "-0.03em", fontWeight: "300" }], "label-lg": ["12px", { lineHeight: "14px", letterSpacing: "0.06em", fontWeight: "400" }], "body-lg": ["14px", { lineHeight: "18px", letterSpacing: "0em", fontWeight: "100" }], "body-sm": ["11px", { lineHeight: "14px", letterSpacing: "0.02em", fontWeight: "100" }], "body-md": ["12px", { lineHeight: "16px", letterSpacing: "0.01em", fontWeight: "100" }], "headline-lg-mobile": ["24px", { lineHeight: "28px", letterSpacing: "-0.02em", fontWeight: "300" }], "label-md": ["10px", { lineHeight: "12px", letterSpacing: "0.08em", fontWeight: "400" }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;}body{overscroll-behavior-y:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-background font-body-md text-body-md text-on-surface antialiased flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-gutter flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="bg-primary text-on-primary px-space-sm py-space-xs font-label-md text-label-md tracking-wider uppercase select-none">ELECTROFIX</div><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant leading-none">MESA 04</span><div class="flex items-center gap-1 mt-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span><span class="font-label-sm text-label-sm text-on-surface-variant">EN LÍNEA</span></div></div></div><div class="flex items-center gap-space-sm"><div class="hidden sm:flex flex-col items-end pr-space-xs"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase">TECH_SYS</span><span class="font-label-md text-label-md text-on-surface">Nuevo Caso</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col w-full pt-16 pb-20 bg-background px-gutter"><div class="flex flex-col w-full pb-6 space-y-space-md">
+<!-- ENCABEZADO SUPERIOR TÉCNICO -->
+<div class="flex flex-col bg-surface-container-low p-space-sm shadow-sm">
+<div class="flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="bg-primary text-on-primary font-label-md text-label-md px-space-xs py-0.5 select-none tracking-wider">MOD_03</span>
+<span class="font-headline-sm text-headline-sm text-on-surface uppercase tracking-tight">NUEVO CASO DE FALLA</span>
+</div>
+<div class="flex items-center gap-1 bg-secondary-container/20 px-space-xs py-0.5">
+<span class="material-symbols-outlined text-[14px] text-secondary">timer</span>
+<span class="font-label-sm text-label-sm text-secondary font-medium tracking-wide">EST: &lt;60s</span>
+</div>
+</div>
+<div class="mt-space-xs flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant tracking-widest uppercase">REGISTRO RÁPIDO EN MESA // PROTOCOLO ACTIVO</span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">PASO 01 / 03</span>
+</div>
+<!-- STEPPER LINEAL MODULAR -->
+<div class="grid grid-cols-3 gap-1 mt-space-sm pt-space-xs bg-surface-container p-1">
+<div class="flex flex-col items-start bg-primary text-on-primary p-space-xs transition-all select-none">
+<span class="font-label-sm text-label-sm text-secondary-container font-semibold">01. ACTIVO</span>
+<span class="font-label-md text-label-md tracking-tight uppercase truncate w-full">TERMINAL &amp; SÍNTOMA</span>
+</div>
+<div class="flex flex-col items-start bg-surface-container-high text-on-surface-variant p-space-xs opacity-80 select-none">
+<span class="font-label-sm text-label-sm text-on-surface-variant">02. PENDIENTE</span>
+<span class="font-label-md text-label-md tracking-tight uppercase truncate w-full">MEDICIÓN CLAVE</span>
+</div>
+<div class="flex flex-col items-start bg-surface-container-high text-on-surface-variant p-space-xs opacity-80 select-none">
+<span class="font-label-sm text-label-sm text-on-surface-variant">03. PENDIENTE</span>
+<span class="font-label-md text-label-md tracking-tight uppercase truncate w-full">DIAGNÓSTICO</span>
+</div>
+</div>
+</div>
+<!-- BLOQUE 01: IDENTIFICACIÓN DEL TERMINAL -->
+<section class="bg-surface-container-lowest p-space-sm shadow-sm flex flex-col space-y-space-sm">
+<div class="flex items-center justify-between bg-surface-container px-space-xs py-1">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 bg-primary"></span>
+<span class="font-label-sm text-label-sm text-on-surface tracking-wider font-semibold uppercase">01 // SELECCIÓN DE TERMINAL</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">DB_VER: 2024.11</span>
+</div>
+<!-- Selector de marca con chips rápidos -->
+<div class="flex flex-col space-y-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase">MARCA / PLATAFORMA</label>
+<div class="grid grid-cols-4 gap-1" id="brand-selector">
+<button class="brand-btn h-9 bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider flex items-center justify-center transition-colors" type="button">SAMSUNG</button>
+<button class="brand-btn h-9 bg-surface-container text-on-surface font-label-md text-label-md uppercase tracking-wider flex items-center justify-center hover:bg-surface-container-high transition-colors" type="button">APPLE</button>
+<button class="brand-btn h-9 bg-surface-container text-on-surface font-label-md text-label-md uppercase tracking-wider flex items-center justify-center hover:bg-surface-container-high transition-colors" type="button">XIAOMI</button>
+<button class="brand-btn h-9 bg-surface-container text-on-surface font-label-md text-label-md uppercase tracking-wider flex items-center justify-center hover:bg-surface-container-high transition-colors" type="button">MOTOROLA</button>
+</div>
+</div>
+<!-- Input autocompletado con metadatos técnicos -->
+<div class="flex flex-col space-y-1">
+<div class="flex justify-between items-center">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase">MODELO / CHASIS / SERIE</label>
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">ESQUEMÁTICO DISPONIBLE</span>
+</div>
+<div class="bg-surface-container-low p-space-xs flex flex-col space-y-1">
+<div class="flex items-center justify-between">
+<input class="w-full bg-transparent font-label-md text-label-md text-on-surface focus:outline-none uppercase font-medium" type="text" value="Samsung Galaxy S22 Ultra (SM-S908B)"/>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">search</span>
+</div>
+<div class="flex flex-wrap items-center gap-1 pt-1">
+<span class="bg-primary text-on-primary font-label-sm text-label-sm px-1.5 py-0.5">PCB: EXYNOS 2200</span>
+<span class="bg-surface-container-high text-on-surface font-label-sm text-label-sm px-1.5 py-0.5">REV 1.0</span>
+<span class="bg-surface-container-high text-on-surface font-label-sm text-label-sm px-1.5 py-0.5">SUB-BOARD: SUB_08</span>
+</div>
+</div>
+</div>
+</section>
+<!-- BLOQUE 02: SÍNTOMA PRINCIPAL EN BANCO (TECLAS GRANDES PARA TALLER / GUANTES) -->
+<section class="bg-surface-container-lowest p-space-sm shadow-sm flex flex-col space-y-space-sm">
+<div class="flex items-center justify-between bg-surface-container px-space-xs py-1">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 bg-primary"></span>
+<span class="font-label-sm text-label-sm text-on-surface tracking-wider font-semibold uppercase">02 // SÍNTOMA PRINCIPAL EN BANCO</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary-container font-semibold uppercase bg-primary px-1">TOUCH OPTIMIZED</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5" id="symptom-grid">
+<!-- Opción Seleccionada -->
+<button class="symptom-btn flex items-center justify-between p-space-sm min-h-[52px] bg-primary text-on-primary text-left transition-all" type="button">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-container text-[20px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md uppercase font-semibold">SIN CARGA / REINICIO</span>
+<span class="font-label-sm text-label-sm text-primary-fixed-dim">NO RESPONDE A VBUS NI BOOT NORMAL</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary-container text-[20px]">check_circle</span>
+</button>
+<!-- Opción Inactiva 1 -->
+<button class="symptom-btn flex items-center justify-between p-space-sm min-h-[52px] bg-surface-container text-on-surface text-left hover:bg-surface-container-high transition-all" type="button">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">electric_meter</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md uppercase font-semibold">CORTO TOTAL PRINCIPAL</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">LÍNEA VBAT / VDD_MAIN EN 0Ω</span>
+</div>
+</div>
+<span class="w-4 h-4 bg-surface-container-high inline-block"></span>
+</button>
+<!-- Opción Inactiva 2 -->
+<button class="symptom-btn flex items-center justify-between p-space-sm min-h-[52px] bg-surface-container text-on-surface text-left hover:bg-surface-container-high transition-all" type="button">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">tv_off</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md uppercase font-semibold">PANTALLA NEGRA / SIN IMAGEN</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">DISPOSITIVO VIBRA / RECONOCE PC</span>
+</div>
+</div>
+<span class="w-4 h-4 bg-surface-container-high inline-block"></span>
+</button>
+<!-- Opción Inactiva 3 -->
+<button class="symptom-btn flex items-center justify-between p-space-sm min-h-[52px] bg-surface-container text-on-surface text-left hover:bg-surface-container-high transition-all" type="button">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">power_settings_new</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md uppercase font-semibold">SIN CONSUMO TRAS GATILLAR</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">PWRKEY NO ALTERA AMPERAJE</span>
+</div>
+</div>
+<span class="w-4 h-4 bg-surface-container-high inline-block"></span>
+</button>
+</div>
+</section>
+<!-- BLOQUE 03: COMPORTAMIENTO EN FUENTE DC / ANALIZADOR USB -->
+<section class="bg-surface-container-lowest p-space-sm shadow-sm flex flex-col space-y-space-sm">
+<div class="flex items-center justify-between bg-surface-container px-space-xs py-1">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 bg-primary"></span>
+<span class="font-label-sm text-label-sm text-on-surface tracking-wider font-semibold uppercase">03 // LECTURA EN FUENTE DC / TESTER</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-medium">CANAL 01 // 5.10V</span>
+</div>
+<!-- Display digital tipo instrumento de laboratorio -->
+<div class="bg-primary text-on-primary p-space-sm flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-primary-container tracking-widest uppercase">CORRIENTE DETECTADA (USB-C)</span>
+<div class="flex items-baseline gap-2 mt-0.5">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-secondary-container tracking-tight font-medium" id="current-readout">0.00 A</span>
+<span class="font-label-sm text-label-sm text-on-primary-fixed-variant">@ 5.12 VDC</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-emerald-400 font-semibold tracking-wider">● ESTABLE</span>
+<span class="font-label-sm text-label-sm text-on-primary-container mt-1">D+ / D- OPEN</span>
+</div>
+</div>
+<!-- Botonera Preset de consumos frecuentes -->
+<div class="grid grid-cols-2 gap-1" id="power-presets">
+<button class="power-preset-btn p-space-xs bg-primary text-on-primary font-label-sm text-label-sm uppercase flex items-center justify-between" data-val="0.00 A" type="button">
+<span>0.00 A FIJO</span>
+<span class="font-label-sm text-label-sm text-secondary-container font-semibold">[SEL]</span>
+</button>
+<button class="power-preset-btn p-space-xs bg-surface-container text-on-surface font-label-sm text-label-sm uppercase flex items-center justify-between hover:bg-surface-container-high" data-val="0.02 A" type="button">
+<span>20 mA FIJO (DFU)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">[+]</span>
+</button>
+<button class="power-preset-btn p-space-xs bg-surface-container text-on-surface font-label-sm text-label-sm uppercase flex items-center justify-between hover:bg-surface-container-high" data-val="CORTO" type="button">
+<span>CORTO TOTAL (CAE)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">[!]</span>
+</button>
+<button class="power-preset-btn p-space-xs bg-surface-container text-on-surface font-label-sm text-label-sm uppercase flex items-center justify-between hover:bg-surface-container-high" data-val="BUCLE" type="button">
+<span>BUCLE CÍCLICO</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">[~]</span>
+</button>
+</div>
+</section>
+<!-- BLOQUE 04: ANTECEDENTE / HISTORIAL DEL DISPOSITIVO -->
+<section class="bg-surface-container-lowest p-space-sm shadow-sm flex flex-col space-y-space-sm">
+<div class="flex items-center justify-between bg-surface-container px-space-xs py-1">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 bg-primary"></span>
+<span class="font-label-sm text-label-sm text-on-surface tracking-wider font-semibold uppercase">04 // ANTECEDENTE / HISTORIAL REPORTADO</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">FACTOR EXTERNO</span>
+</div>
+<div class="grid grid-cols-2 gap-1.5" id="history-selector">
+<!-- Mojado / Humedad Seleccionado -->
+<button class="history-btn flex items-center gap-2 p-space-xs bg-primary text-on-primary transition-all" type="button">
+<span class="material-symbols-outlined text-secondary-container text-[18px]">water_drop</span>
+<div class="flex flex-col text-left">
+<span class="font-label-sm text-label-sm uppercase font-semibold">MOJADO / HUMEDAD</span>
+<span class="font-label-sm text-label-sm text-primary-fixed-dim">SULFATADO PROBABLE</span>
+</div>
+</button>
+<!-- Caída / Golpe Mecánico -->
+<button class="history-btn flex items-center gap-2 p-space-xs bg-surface-container text-on-surface hover:bg-surface-container-high transition-all" type="button">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">hardware</span>
+<div class="flex flex-col text-left">
+<span class="font-label-sm text-label-sm uppercase font-semibold">CAÍDA / IMPACTO</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">POSIBLE PISTA FISURADA</span>
+</div>
+</button>
+<!-- Cargador Genérico -->
+<button class="history-btn flex items-center gap-2 p-space-xs bg-surface-container text-on-surface hover:bg-surface-container-high transition-all" type="button">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">power</span>
+<div class="flex flex-col text-left">
+<span class="font-label-sm text-label-sm uppercase font-semibold">CARGADOR GENÉRICO</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">PICO DE TENSIÓN / OVP</span>
+</div>
+</button>
+<!-- Sin Antecedente -->
+<button class="history-btn flex items-center gap-2 p-space-xs bg-surface-container text-on-surface hover:bg-surface-container-high transition-all" type="button">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">help_center</span>
+<div class="flex flex-col text-left">
+<span class="font-label-sm text-label-sm uppercase font-semibold">SIN ANTECEDENTE</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">FALLA REPENTINA</span>
+</div>
+</button>
+</div>
+</section>
+<!-- CONTROL DE AVANCE / ACCIÓN PRIMARIA -->
+<div class="flex flex-col space-y-space-xs pt-space-xs">
+<button class="w-full min-h-[52px] bg-primary text-on-primary hover:bg-secondary-container hover:text-on-secondary-fixed active:bg-secondary-container active:text-on-secondary-fixed transition-colors flex items-center justify-between px-space-md shadow-sm" id="next-step-btn" type="button">
+<div class="flex flex-col items-start">
+<span class="font-label-sm text-label-sm text-secondary-container uppercase tracking-wider font-semibold">SIGUIENTE ETAPA</span>
+<span class="font-headline-sm text-headline-sm uppercase font-semibold tracking-tight">CONTINUAR A PASO 02: MEDICIÓN CLAVE</span>
+</div>
+<span class="material-symbols-outlined text-[24px]">arrow_forward</span>
+</button>
+<div class="flex items-center justify-between px-space-xs text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase">ESTIMACIÓN BANCO: 2 PASOS RESTANTES (~40s)</span>
+<span class="font-label-sm text-label-sm font-semibold uppercase text-secondary">AUTO-SAVE OK</span>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    // Microinteracción para Brand Chips
+    const brandButtons = document.querySelectorAll('.brand-btn');
+    brandButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        brandButtons.forEach(b => {
+          b.className = 'brand-btn h-9 bg-surface-container text-on-surface font-label-md text-label-md uppercase tracking-wider flex items-center justify-center hover:bg-surface-container-high transition-colors';
+        });
+        btn.className = 'brand-btn h-9 bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider flex items-center justify-center transition-colors';
+      });
+    });
+
+    // Microinteracción para Presets de Consumo
+    const powerButtons = document.querySelectorAll('.power-preset-btn');
+    const readout = document.getElementById('current-readout');
+    powerButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const val = btn.getAttribute('data-val');
+        readout.textContent = val === 'CORTO' ? 'SHORT 0.0V' : (val === 'BUCLE' ? 'CYCLE 0-0.45A' : val);
+        powerButtons.forEach(b => {
+          b.className = 'power-preset-btn p-space-xs bg-surface-container text-on-surface font-label-sm text-label-sm uppercase flex items-center justify-between hover:bg-surface-container-high';
+          const iconSpan = b.querySelector('span:last-child');
+          if (iconSpan) iconSpan.className = 'font-label-sm text-label-sm text-on-surface-variant';
+        });
+        btn.className = 'power-preset-btn p-space-xs bg-primary text-on-primary font-label-sm text-label-sm uppercase flex items-center justify-between';
+        const activeIcon = btn.querySelector('span:last-child');
+        if (activeIcon) activeIcon.className = 'font-label-sm text-label-sm text-secondary-container font-semibold';
+      });
+    });
+
+    // Microinteracción para Síntomas
+    const symptomButtons = document.querySelectorAll('.symptom-btn');
+    symptomButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        symptomButtons.forEach(b => {
+          b.className = 'symptom-btn flex items-center justify-between p-space-sm min-h-[52px] bg-surface-container text-on-surface text-left hover:bg-surface-container-high transition-all';
+          const icon = b.querySelector('.material-symbols-outlined:first-child');
+          if (icon) icon.className = 'material-symbols-outlined text-on-surface-variant text-[20px]';
+          const status = b.querySelector('span:last-child');
+          if (status) {
+            status.outerHTML = '<span class="w-4 h-4 bg-surface-container-high inline-block"></span>';
+          }
+        });
+        btn.className = 'symptom-btn flex items-center justify-between p-space-sm min-h-[52px] bg-primary text-on-primary text-left transition-all';
+        const activeIcon = btn.querySelector('.material-symbols-outlined:first-child');
+        if (activeIcon) activeIcon.className = 'material-symbols-outlined text-secondary-container text-[20px]';
+        const rightBox = btn.querySelector('span:last-child');
+        if (rightBox) {
+          rightBox.outerHTML = '<span class="material-symbols-outlined text-secondary-container text-[20px]">check_circle</span>';
+        }
+      });
+    });
+
+    // Microinteracción para Historial
+    const historyButtons = document.querySelectorAll('.history-btn');
+    historyButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        historyButtons.forEach(b => {
+          b.className = 'history-btn flex items-center gap-2 p-space-xs bg-surface-container text-on-surface hover:bg-surface-container-high transition-all';
+          const icon = b.querySelector('.material-symbols-outlined');
+          if (icon) icon.className = 'material-symbols-outlined text-on-surface-variant text-[18px]';
+          const sub = b.querySelector('div span:last-child');
+          if (sub) sub.className = 'font-label-sm text-label-sm text-on-surface-variant';
+        });
+        btn.className = 'history-btn flex items-center gap-2 p-space-xs bg-primary text-on-primary transition-all';
+        const activeIcon = btn.querySelector('.material-symbols-outlined');
+        if (activeIcon) activeIcon.className = 'material-symbols-outlined text-secondary-container text-[18px]';
+        const activeSub = btn.querySelector('div span:last-child');
+        if (activeSub) activeSub.className = 'font-label-sm text-label-sm text-primary-fixed-dim';
+      });
+    });
+
+    // Botón Siguiente con confirmación visual táctil
+    const nextBtn = document.getElementById('next-step-btn');
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        nextBtn.classList.add('opacity-90');
+        setTimeout(() => {
+          nextBtn.classList.remove('opacity-90');
+        }, 150);
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-1px_8px_rgba(0,0,0,0.04)]" data-active-classes="bg-primary text-on-primary"><div class="h-20 px-gutter flex items-center justify-between gap-space-xs"><a class="flex-1 min-h-[44px] h-12 flex flex-col items-center justify-center bg-surface-container text-on-surface transition-all select-none hover:bg-surface-container-high" data-path="busqueda" href="#"><span class="font-label-md text-label-md tracking-widest">01</span><span class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider">BÚSQUEDA</span></a><a aria-current="page" class="flex-1 min-h-[44px] h-12 flex items-center justify-center gap-space-xs transition-all select-none font-label-md tracking-wider uppercase bg-primary text-on-primary" data-path="nuevo-caso" href="#"><span class="material-symbols-outlined text-[18px]">add</span><span>+ NUEVO CASO</span></a><a class="flex-1 min-h-[44px] h-12 flex flex-col items-center justify-center bg-surface-container text-on-surface transition-all select-none hover:bg-surface-container-high" data-path="guardados" href="#"><span class="font-label-md text-label-md tracking-widest">02</span><span class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider">GUARDADOS</span></a></div></nav></body></html>

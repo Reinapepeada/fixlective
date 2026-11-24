@@ -1,0 +1,6 @@
+Asset: fixlective-wordmark.png
+Mode: built-in image_gen edit
+Date: 2026-11-17
+Brand rule: use this typographic image by itself; no circuit F alongside the full name.
+
+Use case: precise-object-edit. Asset type: standalone Fixlective typographic logo for a website header. Input image 1 is the EDIT TARGET. Remove ONLY the amber circuit-shaped F symbol on the left. Keep the COMPLETE black wordmark "FIXLECTIVE" exactly as it appears in the original: F I X L E C T I V E, preserving the distinctive heavy geometric lettering, technical letter cuts, charcoal color, clean flat rendering, and all letter shapes. Re-center the unchanged complete wordmark on the horizontal white canvas and make it occupy roughly 90 percent of canvas width with modest even horizontal margins. Preserve the original wide canvas ratio. This final image must contain ONLY the word FIXLECTIVE in the original brand lettering, without the amber symbol, without any icon or standalone F, without tagline or extra elements. Do not replace the original custom lettering with a generic font. Solid white background, no gradients, shadows, textures, mockups or presentation board.

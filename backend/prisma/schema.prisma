@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model DeviceModel {
+  id            String        @id @default(dbgenerated("(gen_random_uuid())::text"))
+  brand         String        @db.VarChar(80)
+  name          String        @db.VarChar(80)
+  created_order BigInt        @unique @default(autoincrement())
+  failureCases  FailureCase[]
+
+  @@map("device_models")
+}
+
+model FailureCase {
+  id              String            @id @default(dbgenerated("(gen_random_uuid())::text"))
+  device_model_id String
+  symptom         String            @db.VarChar(500)
+  diagnosis       String            @default("") @db.VarChar(2000)
+  solution        String            @default("") @db.VarChar(2000)
+  status          FailureCaseStatus @default(active)
+  created_order   BigInt            @unique @default(autoincrement())
+  deviceModel     DeviceModel       @relation(fields: [device_model_id], references: [id], onDelete: Restrict)
+
+  @@index([device_model_id])
+  @@map("failure_cases")
+}
+
+enum FailureCaseStatus {
+  active
+  archived
+
+  @@map("failure_case_status")
+}

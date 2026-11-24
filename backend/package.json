@@ -5,11 +5,31 @@
   "description": "Backend de Fixlective, inteligencia colectiva para el diagnóstico de fallas técnicas.",
   "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "start": "tsx index.js",
+    "dev": "tsx watch index.js",
+    "test": "tsx --test",
+    "db:check": "tsx scripts/check-db.js",
+    "db:seed": "prisma db seed",
+    "pretest": "prisma generate"
   },
   "dependencies": {
+    "@prisma/adapter-pg": "7.10.1",
+    "@prisma/client": "7.10.1",
     "cors": "^2.8.6",
     "dotenv": "^18.0.8",
-    "express": "^5.3.0"
+    "express": "^5.3.0",
+    "pg": "8.23.1"
+  },
+  "devDependencies": {
+    "prisma": "7.10.1",
+    "tsx": "4.23.15"
+  },
+  "engines": {
+    "node": "24.x"
+  },
+  "overrides": {
+    "@prisma/config": {
+      "effect": "3.22.1"
+    }
   }
 }

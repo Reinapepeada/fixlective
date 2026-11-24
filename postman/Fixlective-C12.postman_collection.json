@@ -1,0 +1,665 @@
+{
+  "info": {
+    "name": "Fixlective · Clase 12",
+    "description": "Ejecutá la colección completa y en orden. Usa los ejemplos del seed para verificar los listados. Crea, edita y elimina únicamente los registros temporales de esta ejecución. Configurá baseUrl para apuntar a la API local o al entorno de práctica en Render.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:3000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Salud de la API y PostgreSQL",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set('fixlectiveC12ModelId', '');",
+              "pm.variables.set('fixlectiveC12CaseId', '');"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+              "pm.test('API y base disponibles', () => {",
+              "  pm.expect(pm.response.json()).to.include({ status: 'ok', db: 'ok' });",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/health"
+      }
+    },
+    {
+      "name": "Listar modelos y verificar un ejemplo del seed",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+              "pm.test('El listado contiene el Galaxy A52 del seed', () => {",
+              "  const { status, data } = pm.response.json();",
+              "  pm.expect(status).to.eql('ok');",
+              "  pm.expect(data).to.be.an('array');",
+              "  pm.expect(data.some(item => item.id === 'samsung-a52')).to.eql(true);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/device-models"
+      }
+    },
+    {
+      "name": "Listar casos y verificar la relación del seed",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+              "pm.test('El caso de carga está asociado al Galaxy A52', () => {",
+              "  const { status, data } = pm.response.json();",
+              "  pm.expect(status).to.eql('ok');",
+              "  pm.expect(data.find(item => item.id === 'example-charge')).to.include({ device_model_id: 'samsung-a52' });",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/failure-cases"
+      }
+    },
+    {
+      "name": "Crear un modelo de prueba",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.variables.set('fixlectiveC12ModelId', '');",
+              "pm.variables.set('fixlectiveC12CaseId', '');",
+              "pm.variables.set('fixlectiveC12ModelName', 'Prueba ' + pm.variables.replaceIn('{{$guid}}'));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 201', () => pm.response.to.have.status(201));",
+              "if (pm.response.code === 201) {",
+              "  const model = pm.response.json().data;",
+              "  if (model?.id && model.name === pm.variables.get('fixlectiveC12ModelName')) pm.variables.set('fixlectiveC12ModelId', model.id);",
+              "}",
+              "pm.test('Modelo creado con el nombre de esta ejecución', () => {",
+              "  const { status, data } = pm.response.json();",
+              "  pm.expect(status).to.eql('ok');",
+              "  pm.expect(data).to.include({ brand: 'Fixlective C12', name: pm.variables.get('fixlectiveC12ModelName') });",
+              "  pm.expect(data.id).to.be.a('string').and.not.be.empty;",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/device-models",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"brand\": \"Fixlective C12\",\n  \"name\": \"{{fixlectiveC12ModelName}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Leer el modelo creado",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.variables.get('fixlectiveC12ModelId')) pm.execution.skipRequest();"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+              "pm.test('El registro se recupera por su ID', () => {",
+              "  pm.expect(pm.response.json().data.id).to.eql(pm.variables.get('fixlectiveC12ModelId'));",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/device-models/{{fixlectiveC12ModelId}}"
+      }
+    },
+    {
+      "name": "Rechazar un modelo duplicado con otra capitalización",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.variables.get('fixlectiveC12ModelId')) pm.execution.skipRequest();"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 409', () => pm.response.to.have.status(409));",
+              "pm.test('La API explica el conflicto', () => {",
+              "  pm.expect(pm.response.json().status).to.eql('error');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/device-models",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"brand\": \"fixlective c12\",\n  \"name\": \"{{fixlectiveC12ModelName}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Editar el nombre del modelo",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.variables.get('fixlectiveC12ModelId')) pm.execution.skipRequest();"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+              "pm.test('El PATCH conserva la marca', () => {",
+              "  pm.expect(pm.response.json().data).to.include({ brand: 'Fixlective C12', name: pm.variables.get('fixlectiveC12ModelName') + ' editado' });",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/device-models/{{fixlectiveC12ModelId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"{{fixlectiveC12ModelName}} editado\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Rechazar un caso con modelo inexistente",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 400', () => pm.response.to.have.status(400));",
+              "pm.test('La API explica el dato inválido', () => {",
+              "  pm.expect(pm.response.json().status).to.eql('error');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/failure-cases",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"device_model_id\": \"00000000-0000-4000-8000-000000000000\",\n  \"symptom\": \"Síntoma de práctica de la colección C12.\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Crear un caso relacionado",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.variables.get('fixlectiveC12ModelId')) pm.execution.skipRequest();"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 201', () => pm.response.to.have.status(201));",
+              "if (pm.response.code === 201) {",
+              "  const item = pm.response.json().data;",
+              "  if (item?.id && item.device_model_id === pm.variables.get('fixlectiveC12ModelId')) pm.variables.set('fixlectiveC12CaseId', item.id);",
+              "}",
+              "pm.test('El caso queda activo y vinculado al modelo', () => {",
+              "  const { status, data } = pm.response.json();",
+              "  pm.expect(status).to.eql('ok');",
+              "  pm.expect(data).to.include({ device_model_id: pm.variables.get('fixlectiveC12ModelId'), status: 'active', diagnosis: '', solution: '' });",
+              "  pm.expect(data.id).to.be.a('string').and.not.be.empty;",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/failure-cases",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"device_model_id\": \"{{fixlectiveC12ModelId}}\",\n  \"symptom\": \"Síntoma de práctica de la colección C12.\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Leer el caso creado",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.variables.get('fixlectiveC12CaseId')) pm.execution.skipRequest();"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+              "pm.test('La API devuelve el caso de esta ejecución', () => {",
+              "  pm.expect(pm.response.json().data.id).to.eql(pm.variables.get('fixlectiveC12CaseId'));",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/failure-cases/{{fixlectiveC12CaseId}}"
+      }
+    },
+    {
+      "name": "Filtrar los casos por modelo",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.variables.get('fixlectiveC12ModelId')) pm.execution.skipRequest();",
+              "if (!pm.variables.get('fixlectiveC12CaseId')) pm.execution.skipRequest();"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+              "pm.test('El filtro incluye el caso y solo devuelve casos asociados', () => {",
+              "  const { data } = pm.response.json();",
+              "  pm.expect(data.map(item => item.id)).to.include(pm.variables.get('fixlectiveC12CaseId'));",
+              "  pm.expect(data.every(item => item.device_model_id === pm.variables.get('fixlectiveC12ModelId'))).to.eql(true);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/failure-cases?deviceModelId={{fixlectiveC12ModelId}}"
+      }
+    },
+    {
+      "name": "Editar el diagnóstico y archivar",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.variables.get('fixlectiveC12CaseId')) pm.execution.skipRequest();"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+              "pm.test('La edición parcial conserva el síntoma', () => {",
+              "  pm.expect(pm.response.json().data).to.include({ symptom: 'Síntoma de práctica de la colección C12.', status: 'archived', diagnosis: 'Diagnóstico ficticio' });",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/failure-cases/{{fixlectiveC12CaseId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"diagnosis\": \"Diagnóstico ficticio\",\n  \"status\": \"archived\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Rechazar el borrado del modelo con casos asociados",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.variables.get('fixlectiveC12ModelId')) pm.execution.skipRequest();",
+              "if (!pm.variables.get('fixlectiveC12CaseId')) pm.execution.skipRequest();"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 409', () => pm.response.to.have.status(409));",
+              "pm.test('La API explica el conflicto', () => {",
+              "  pm.expect(pm.response.json().status).to.eql('error');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/api/device-models/{{fixlectiveC12ModelId}}"
+      }
+    },
+    {
+      "name": "Restaurar el caso",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.variables.get('fixlectiveC12CaseId')) pm.execution.skipRequest();"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+              "pm.test('El caso vuelve a estar activo', () => {",
+              "  pm.expect(pm.response.json().data.status).to.eql('active');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/failure-cases/{{fixlectiveC12CaseId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"active\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Limpiar el caso de esta ejecución",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.variables.get('fixlectiveC12CaseId')) pm.execution.skipRequest();"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+              "pm.test('La API devuelve el ID eliminado', () => {",
+              "  pm.expect(pm.response.json().data.id).to.eql(pm.variables.get('fixlectiveC12CaseId'));",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/api/failure-cases/{{fixlectiveC12CaseId}}"
+      }
+    },
+    {
+      "name": "Comprobar que el caso se eliminó",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.variables.get('fixlectiveC12CaseId')) pm.execution.skipRequest();"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 404', () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/failure-cases/{{fixlectiveC12CaseId}}"
+      }
+    },
+    {
+      "name": "Limpiar el modelo de esta ejecución",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.variables.get('fixlectiveC12ModelId')) pm.execution.skipRequest();"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+              "pm.test('La API devuelve el ID eliminado', () => {",
+              "  pm.expect(pm.response.json().data.id).to.eql(pm.variables.get('fixlectiveC12ModelId'));",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/api/device-models/{{fixlectiveC12ModelId}}"
+      }
+    },
+    {
+      "name": "Comprobar que el modelo se eliminó",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.variables.get('fixlectiveC12ModelId')) pm.execution.skipRequest();"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 404', () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/device-models/{{fixlectiveC12ModelId}}"
+      }
+    }
+  ]
+}
