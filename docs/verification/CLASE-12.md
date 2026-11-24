@@ -22,6 +22,13 @@ npm run dev
 
 El seed carga los modelos antes de sus casos y se puede repetir. Git ignora `backend/.env` y el cliente generado. El repositorio conserva el esquema, el SQL, el seed y los nombres de variables en `backend/.env.example`.
 
+### TLS de Supabase
+
+El backend incluye la CA pública de Supabase en `backend/certs/supabase-root-2021.crt`. Agregá estos parámetros a las URLs al trabajar desde `backend/`.
+
+- `DATABASE_URL` usa `sslmode=verify-full&sslrootcert=certs%2Fsupabase-root-2021.crt` además de `pgbouncer=true`.
+- `DIRECT_URL` usa `sslmode=require&sslcert=certs%2Fsupabase-root-2021.crt&sslaccept=strict`.
+
 ## Verificación local
 
 Importá [Fixlective · Clase 12](../../postman/Fixlective-C12.postman_collection.json) a Postman. Corré la colección completa con `baseUrl` en `http://127.0.0.1:3000`. Cada ejecución crea un modelo con nombre único, crea un caso asociado y al final borra esos dos registros por sus IDs. Los ejemplos del seed se usan para lectura.
