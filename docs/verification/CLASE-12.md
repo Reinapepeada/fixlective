@@ -54,7 +54,7 @@ Para verificar persistencia, creá un caso de práctica con `POST /api/failure-c
 4. Guardá la URL pública y volvé a correr la colección con `baseUrl` en la URL de Render, sin barra final.
 
 ```sh
-npx --yes newman run postman/Fixlective-C12.postman_collection.json --env-var "baseUrl=https://tu-servicio.onrender.com"
+npx --yes newman run postman/Fixlective-C12.postman_collection.json --env-var "baseUrl=https://fixlective-c12-api-b5ht.onrender.com"
 ```
 
 El cierre requiere la migración inicial versionada, el seed aplicado, la colección aprobada en local y en Render y la URL pública del backend para la clase 13.
@@ -78,3 +78,10 @@ Las consultas de Prisma son asíncronas. Los controladores esperan su resultado 
 Se aplicó la migración inicial sobre una base descartable PGlite, con PostgreSQL embebido, y se ejecutó el seed dos veces. Quedaron tres modelos y tres casos. La colección de Postman se ejecutó dos veces con Newman y pasó las 18 solicitudes y 34 aserciones por ejecución.
 
 Un caso de prueba siguió disponible por HTTP después de reiniciar Express con la misma base. Al terminar se borró el caso de prueba.
+
+## Verificación en Supabase y Render
+
+- [URL pública del backend](https://fixlective-c12-api-b5ht.onrender.com)
+- [Salud de la API y de PostgreSQL](https://fixlective-c12-api-b5ht.onrender.com/api/health) respondió HTTP 200.
+- Prisma confirmó que la migración inicial quedó aplicada en Supabase. El seed cargó tres modelos y tres casos de ejemplo.
+- La colección pasó en local y en Render, con 18 solicitudes y 34 aserciones por ejecución. Cada ejecución eliminó sus registros de prueba.
